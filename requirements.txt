@@ -1,2 +1,4 @@
-Flask==2.2.5
+Flask
+gunicorn
 psycopg2-binary
+
