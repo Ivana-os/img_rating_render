@@ -99,6 +99,7 @@ async function submitRatings() {
     alert('Please rate all images before continuing.');
     return;
   }
+  console.log("Šaljem ocjene:", ratings);
 
   try {
     const response = await fetch('/rate', {
