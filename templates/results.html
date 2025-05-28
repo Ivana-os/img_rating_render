@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rezultati ocjena</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>Rezultati ocjena</h1>
+  <table id="ratingsTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Index</th>
+        <th>Vrijeme</th>
+        <th>Folder 1</th>
+        <th>Folder 2</th>
+        <th>Folder 3</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('/results')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector('#ratingsTable tbody');
+        data.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${row.id}</td>
+            <td>${row.index}</td>
+            <td>${row.time}</td>
+            <td>${row.folder1}</td>
+            <td>${row.folder2}</td>
+            <td>${row.folder3}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        console.error('Greška pri dohvaćanju rezultata:', err);
+        alert('Nešto nije u redu s dohvaćanjem podataka.');
+      });
+  </script>
+</body>
+</html>
