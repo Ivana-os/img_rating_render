@@ -54,7 +54,7 @@ async function showImages(index) {
       for (let s = 4; s >= 1; s--) {
         const input = document.createElement('input');
         input.type = 'radio';
-        input.name = `row1_${folderNum}`;
+        input.name = `folder${folderNum}`;
         input.value = s;
         input.id = `${input.name}_${s}`;
 
