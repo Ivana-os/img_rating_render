@@ -9,7 +9,7 @@ app = Flask(__name__)
 conn = psycopg2.connect(os.environ.get("DATABASE_URL"))
 cursor = conn.cursor()
 
-# 🧱 Kreiranje tablice ako ne postoji
+# Kreiranje tablice ako ne postoji
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS ratings (
     id SERIAL PRIMARY KEY,
@@ -47,6 +47,21 @@ def rate():
     ))
     conn.commit()
     return jsonify(message="Ocjena spremljena u bazu")
+@app.route('/results')
+def results():
+    cursor.execute("SELECT * FROM ratings ORDER BY id")
+    rows = cursor.fetchall()
+    results = []
+    for row in rows:
+        results.append({
+            'id': row[0],
+            'index': row[1],
+            'time': row[2].strftime('%Y-%m-%d %H:%M:%S'),
+            'folder1': row[3],
+            'folder2': row[4],
+            'folder3': row[5],
+        })
+    return jsonify(results)
 
 #Stranica za pregled rezultata (ako je imaš)
 @app.route('/results-view')
