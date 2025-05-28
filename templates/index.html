@@ -3,32 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Image Comparison Rating</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>Rate 3 Images (1st is reference)</h1>
-  <!--<div id="image-container" class="image-row"></div>-->
-  
-  
 
-<div id="image-container">
-  <div class="image-row">
-    <!-- 5 image-blocks for row 1 -->
+  <div id="image-container">
+    <div class="image-row">
+      <!-- Images will be inserted here by JS -->
+    </div>
   </div>
 
-</div>
-
-
-
-<button onclick="submitRatings()">Next</button>
+  <button onclick="submitRatings()">Next</button>
 
   <div id="progress-container">
     <div id="progress-bar"></div>
   </div>
   <p id="counter"></p>
 
- <button id="finishBtn" onclick="finishRating()" style="display:none;">Finish</button>
+  <button id="finishBtn" onclick="finishRating()" style="display:none;">Finish</button>
 
-  <script src="scripts_v2.js"></script>
+  <script src="{{ url_for('static', filename='scripts_v2.js') }}"></script>
 </body>
 </html>
