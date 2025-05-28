@@ -31,6 +31,8 @@ def index():
 @app.route('/rate', methods=['POST'])
 def rate():
     data = request.get_json()
+    print("Primljeni podaci:", data)
+
     index = data.get('index')
     ratings = data.get('ratings', {})
     now = datetime.now()
@@ -41,12 +43,13 @@ def rate():
     """, (
         index,
         now,
-        ratings.get('folder1'),
-        ratings.get('folder2'),
-        ratings.get('folder3')
+        int(ratings.get('folder1')) if ratings.get('folder1') else None,
+        int(ratings.get('folder2')) if ratings.get('folder2') else None,
+        int(ratings.get('folder3')) if ratings.get('folder3') else None
     ))
     conn.commit()
     return jsonify(message="Ocjena spremljena u bazu")
+
 @app.route('/results')
 def results():
     cursor.execute("SELECT * FROM ratings ORDER BY id")
